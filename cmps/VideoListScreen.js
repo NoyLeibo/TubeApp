@@ -10,20 +10,20 @@ const VideoListScreen = () => {
     const navigation = useNavigation();
 
     useEffect(() => {
-        const loadVideos = async () => {
-            setLoading(true);
-            try {
-                const fetchedVideos = await fetchVideos();
-                setVideos(fetchedVideos);
-                setError(null);
-            } catch (err) {
-                setError(err.message);
-            }
-            setLoading(false);
-        };
-
-        loadVideos();
+        loadVideos()
     }, []);
+
+    async function loadVideos() {
+        setLoading(true)
+        try {
+            const fetchedVideos = await fetchVideos()
+            setVideos(fetchedVideos)
+            setError(null)
+        } catch (err) {
+            setError(err.message)
+        }
+        setLoading(false)
+    }
 
     const renderItem = ({ item }) => (
         <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('VideoDetails', {
@@ -36,12 +36,19 @@ const VideoListScreen = () => {
         </TouchableOpacity>
     );
 
+    if (error) {
+        return (
+            <View style={styles.centered}>
+                <Text>Error: {error}</Text>
+                <Button title="Retry" onPress={() => loadVideos()} />
+            </View>
+        );
+    }
 
     return (
         <View style={styles.container}>
             {loading && <Text>Loading...</Text>}
-            {error && <Text>Error: {error}</Text>}
-            {!loading && !error && (
+            {!loading && (
                 <FlatList
                     data={videos}
                     renderItem={renderItem}
@@ -50,7 +57,7 @@ const VideoListScreen = () => {
             )}
         </View>
     );
-};
+}
 
 const styles = StyleSheet.create({
     container: {
