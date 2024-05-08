@@ -5,6 +5,8 @@ import YoutubePlayer from 'react-native-youtube-iframe';
 const VideoDetailsScreen = ({ route }) => {
     const { videoId, title, description } = route.params;
 
+    // testing
+
     return (
         <ScrollView contentContainerStyle={styles.container}>
             <Text style={styles.title}>{title}</Text>
