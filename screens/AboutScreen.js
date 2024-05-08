@@ -6,7 +6,6 @@ export function AboutScreen({ route, navigation }) {
     console.log(route);
     const [text, setText] = useState(name);
 
-    // Function to handle the name change using setParams
     const handleChangeName = () => {
         navigation.setParams({ name: text });
     };
