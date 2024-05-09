@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, ActivityIndicator, Button } from 'react-native';  // Added Button import if not already included
 import { fetchVideos } from '../services/youtubeAPI';
 import { useNavigation } from '@react-navigation/native';
-import Colors from '../constants/Colors';
+import { customColors } from '../constants/Colors';
 
 const VideoListScreen = () => {
     const [videos, setVideos] = useState([]);
@@ -11,20 +11,21 @@ const VideoListScreen = () => {
     const navigation = useNavigation();
 
     useEffect(() => {
-        loadVideos()
+        loadVideos();
     }, []);
 
     async function loadVideos() {
-        setLoading(true)
+        setLoading(true);
         try {
-            const fetchedVideos = await fetchVideos()
-            setVideos(fetchedVideos)
-            setError(null)
+            const fetchedVideos = await fetchVideos();
+            setVideos(fetchedVideos);
+            setError(null);
         } catch (err) {
-            setError(err.message)
+            setError(err.message);
         }
-        setLoading(false)
+        setLoading(false);
     }
+
 
     const renderItem = ({ item }) => (
         <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('VideoDetails', {
@@ -48,7 +49,7 @@ const VideoListScreen = () => {
 
     return (
         <View style={styles.container}>
-            {loading && <ActivityIndicator size="large" color={Colors.loaderColor} />}
+            {loading && <ActivityIndicator size="large" color={customColors.loaderColor} />}
             {!loading && (
                 <FlatList
                     data={videos}
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         padding: 10,
         borderBottomWidth: 1,
-        borderBottomColor: '#cccccc',
+        borderBottomColor: customColors.secondary,
     },
     thumbnail: {
         width: 100,
@@ -80,6 +81,7 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         justifyContent: 'center',
         alignItems: 'center',
+        color: customColors.primary,
     }
 });
 

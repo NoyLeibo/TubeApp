@@ -1,25 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Button, useColorScheme } from 'react-native';
 import VideoListScreen from './screens/VideoListScreen';
 import VideoDetailsScreen from './screens/VideoDetailsScreen';
-import Colors from './constants/Colors'; // Adjust the path as necessary
+import { customColors, MyThemes } from './constants/Colors'
 
 const Stack = createStackNavigator();
 
 function App() {
+  // Detect system theme
+  const systemTheme = useColorScheme();
+  const [theme, setTheme] = useState(systemTheme || 'light');
+
+  useEffect(() => {
+    setTheme(systemTheme);
+  }, [systemTheme]);
+
+  const toggleTheme = () => {
+    setTheme(theme => theme === 'light' ? 'dark' : 'light');
+  };
+
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={MyThemes[theme]}>
       <Stack.Navigator
         initialRouteName="VideoList"
         screenOptions={{
           headerStyle: {
-            backgroundColor: Colors.headerBackground, // Use the header background color
+            backgroundColor: MyThemes[theme].colors.card,
           },
-          headerTintColor: Colors.headerText, // Use the header text color
+          headerTintColor: MyThemes[theme].colors.text,
           headerTitleStyle: {
             fontWeight: 'bold',
           },
+          headerRight: () => (
+            <Button onPress={toggleTheme} title="Toggle Theme" />
+          ),
         }}
       >
         <Stack.Screen

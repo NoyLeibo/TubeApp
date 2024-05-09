@@ -1,11 +1,28 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
+import { useTheme } from '@react-navigation/native'; // Import useTheme
 
 const VideoDetailsScreen = ({ route }) => {
     const { videoId, title, description } = route.params;
+    const theme = useTheme(); // Use the theme hook
 
-    // testing
+    const styles = StyleSheet.create({
+        container: {
+            padding: 10,
+            backgroundColor: theme.colors.background, // Use background color from theme
+        },
+        title: {
+            fontSize: 20,
+            fontWeight: 'bold',
+            marginBottom: 20,
+            color: theme.colors.text, // Use text color from theme
+        },
+        description: {
+            fontSize: 16,
+            color: theme.colors.text, // Use text color from theme
+        }
+    });
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
@@ -19,19 +36,5 @@ const VideoDetailsScreen = ({ route }) => {
         </ScrollView>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        padding: 10,
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        marginBottom: 20,
-    },
-    description: {
-        fontSize: 16,
-    }
-});
 
 export default VideoDetailsScreen;
