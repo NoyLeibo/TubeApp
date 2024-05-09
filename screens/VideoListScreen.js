@@ -1,31 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, ActivityIndicator, Button } from 'react-native';  // Added Button import if not already included
+import React, { useCallback, useEffect, useState } from 'react';
+import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, ActivityIndicator, Button, RefreshControl } from 'react-native';
 import { fetchVideos } from '../services/youtubeAPI';
 import { useNavigation } from '@react-navigation/native';
 import { customColors } from '../constants/Colors';
 
 const VideoListScreen = () => {
-    const [videos, setVideos] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const navigation = useNavigation();
+    const [videos, setVideos] = useState([])
+    const [refreshing, setRefreshing] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(null)
+    const navigation = useNavigation()
 
     useEffect(() => {
-        loadVideos();
-    }, []);
+        loadVideos()
+    }, [])
+
+    const onRefresh = useCallback(() => {
+        setRefreshing(true)
+        loadVideos().then(() => {
+            setRefreshing(false)
+        })
+    }, [])
 
     async function loadVideos() {
-        setLoading(true);
+        setLoading(true)
         try {
-            const fetchedVideos = await fetchVideos();
-            setVideos(fetchedVideos);
-            setError(null);
+            const fetchedVideos = await fetchVideos()
+            setVideos(fetchedVideos)
+            setError(null)
         } catch (err) {
-            setError(err.message);
+            setError(err.message)
         }
-        setLoading(false);
+        setLoading(false)
     }
-
 
     const renderItem = ({ item }) => (
         <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('VideoDetails', {
@@ -42,9 +49,9 @@ const VideoListScreen = () => {
         return (
             <View style={styles.centered}>
                 <Text>Error: {error}</Text>
-                <Button title="Retry" onPress={() => loadVideos()} />
+                <Button title="Retry" onPress={loadVideos} />
             </View>
-        );
+        )
     }
 
     return (
@@ -55,10 +62,16 @@ const VideoListScreen = () => {
                     data={videos}
                     renderItem={renderItem}
                     keyExtractor={item => item.id.videoId}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={refreshing}
+                            onRefresh={onRefresh}
+                            colors={[customColors.loaderColor]}
+                            tintColor={customColors.loaderColor} />}
                 />
             )}
         </View>
-    );
+    )
 }
 
 const styles = StyleSheet.create({
@@ -82,7 +95,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         color: customColors.primary,
+    },
+    centered: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 });
 
-export default VideoListScreen;
+export default VideoListScreen

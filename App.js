@@ -4,12 +4,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Button, useColorScheme } from 'react-native';
 import VideoListScreen from './screens/VideoListScreen';
 import VideoDetailsScreen from './screens/VideoDetailsScreen';
-import { customColors, MyThemes } from './constants/Colors'
+import { MyThemes } from './constants/Colors';
 
 const Stack = createStackNavigator();
 
 function App() {
-  // Detect system theme
   const systemTheme = useColorScheme();
   const [theme, setTheme] = useState(systemTheme || 'light');
 
@@ -36,8 +35,7 @@ function App() {
           headerRight: () => (
             <Button onPress={toggleTheme} title="Toggle Theme" />
           ),
-        }}
-      >
+        }}>
         <Stack.Screen
           name="VideoList"
           component={VideoListScreen}
