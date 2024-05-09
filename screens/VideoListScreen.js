@@ -10,7 +10,7 @@ const VideoListScreen = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
     const navigation = useNavigation()
-
+    console.log(videos);
     useEffect(() => {
         loadVideos()
     }, [])
@@ -35,7 +35,7 @@ const VideoListScreen = () => {
     }
 
     const renderItem = ({ item }) => (
-        <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('VideoDetails', {
+        <TouchableOpacity TouchableOpacity style={styles.item} onPress={() => navigation.navigate('VideoDetails', {
             videoId: item.id.videoId,
             title: item.snippet.title,
             description: item.snippet.description
