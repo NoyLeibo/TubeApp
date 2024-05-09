@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { fetchVideos } from '../services/youtubeAPI';
 import { useNavigation } from '@react-navigation/native';
+import Colors from '../constants/Colors';
 
 const VideoListScreen = () => {
     const [videos, setVideos] = useState([]);
@@ -47,7 +48,7 @@ const VideoListScreen = () => {
 
     return (
         <View style={styles.container}>
-            {loading && <Text>Loading...</Text>}
+            {loading && <ActivityIndicator size="large" color={Colors.loaderColor} />}
             {!loading && (
                 <FlatList
                     data={videos}
