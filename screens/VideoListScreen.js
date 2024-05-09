@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, ActivityIndicator, Button, RefreshControl } from 'react-native';
 import { fetchVideos } from '../services/youtubeAPI';
 import { useNavigation } from '@react-navigation/native';
@@ -11,16 +11,17 @@ const VideoListScreen = () => {
     const [error, setError] = useState(null)
     const navigation = useNavigation()
     console.log(videos);
+
     useEffect(() => {
         loadVideos()
     }, [])
 
-    const onRefresh = useCallback(() => {
+    function onRefresh() {
         setRefreshing(true)
         loadVideos().then(() => {
             setRefreshing(false)
         })
-    }, [])
+    }
 
     async function loadVideos() {
         setLoading(true)

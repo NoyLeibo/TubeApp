@@ -76,7 +76,7 @@ function App() {
 const styles = StyleSheet.create({
   btnStyle: {
     fontWeight: 'bold',
-    marginHorizontal: 16,
+    marginRight: 16,
   },
 });
 
