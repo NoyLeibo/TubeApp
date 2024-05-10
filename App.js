@@ -8,6 +8,7 @@ import VideoSearchScreen from './screens/VideoSearchScreen.js';
 import { MyThemes } from './constants/Colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ThemeButton from './cmps/ThemeButton.js';
+import SearchButton from './cmps/SearchButton.js';
 
 const Stack = createStackNavigator();
 
@@ -29,7 +30,9 @@ function App() {
     AsyncStorage.setItem('theme', newTheme);
   }
 
-  function openMenu() { }
+  function navigateToSearch() {
+    console.log('Search Page');
+  }
 
   return (
     <NavigationContainer theme={MyThemes[theme]}>
@@ -43,31 +46,29 @@ function App() {
           headerTitleStyle: {
             fontWeight: 'bold',
           },
-          headerRight: () => (<ThemeButton theme={theme} toggleTheme={toggleTheme} />),
-          // headerLeft: () => (
-          //   <Button onPress={openMenu} title="B" />
-          // ),
+          headerRight: () => (<ThemeButton theme={theme} toggleTheme={toggleTheme} />)
         }}>
         <Stack.Screen
           name="VideoList"
           component={VideoListScreen}
-          options={{ title: 'Video List' }}
+          options={{
+            title: 'Video List',
+            headerLeft: () => (<SearchButton navigateToSearch={navigateToSearch} />)
+          }}
         />
         <Stack.Screen
           name="VideoDetails"
           component={VideoDetailsScreen}
           options={{ title: 'Video Details' }}
         />
-        {/* <Stack.Screen
+        <Stack.Screen
           name="VideoSearch"
           component={VideoSearchScreen}
           options={{ title: 'Video Search' }}
-        /> */}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
-
-
 
 export default App;

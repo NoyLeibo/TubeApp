@@ -10,7 +10,7 @@ const VideoListScreen = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
     const navigation = useNavigation()
-    console.log(videos);
+    // console.log(videos);
 
     useEffect(() => {
         loadVideos()

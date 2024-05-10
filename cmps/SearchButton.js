@@ -1,13 +1,13 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Text, Pressable, StyleSheet } from 'react-native';
 
-function ThemeButton({ theme, toggleTheme }) {
+function SearchButton({ navigateToSearch }) {
+    const navigation = useNavigation()
 
     return (
-        <Pressable onPress={toggleTheme} style={styles.btnStyle}>
-            <Text style={styles.btnTextStyle}>
-                {theme === 'light' ? 'Switch to Dark' : 'Switch to Light'}
-            </Text>
+        <Pressable onPress={() => navigation.navigate('VideoSearch')} style={styles.btnStyle}>
+            <Text style={styles.btnTextStyle}>Search</Text>
         </Pressable>
     );
 };
@@ -15,7 +15,7 @@ function ThemeButton({ theme, toggleTheme }) {
 const styles = StyleSheet.create({
     btnStyle: {
         fontWeight: 'bold',
-        // marginRight: 16,
+        // margin: 16,
         padding: 10,
         color: 'white'
     },
@@ -25,4 +25,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ThemeButton
+export default SearchButton
