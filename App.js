@@ -22,10 +22,6 @@ function App() {
 function MainApp() {
   const { theme } = useTheme();
 
-  function navigateToSearch() {
-    console.log('Search Page');
-  }
-
   return (
     <NavigationContainer theme={MyThemes[theme]}>
       <Stack.Navigator
@@ -38,7 +34,7 @@ function MainApp() {
           headerTitleStyle: {
             fontWeight: 'bold',
           },
-          headerTitleAlign: 'center', // Ensure the title is centered
+          headerTitleAlign: 'center',
           headerRight: () => <ThemeButton />
         }}
       >
@@ -47,7 +43,7 @@ function MainApp() {
           component={VideoListScreen}
           options={{
             title: 'Video List',
-            headerLeft: () => <SearchButton navigateToSearch={navigateToSearch} />
+            headerLeft: () => <SearchButton />
           }}
         />
         <Stack.Screen

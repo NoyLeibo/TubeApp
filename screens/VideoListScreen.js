@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, ActivityIndicator, Button, RefreshControl } from 'react-native';
-import { fetchVideos } from '../services/youtubeAPI';
+import { fetchVideos } from '../services/youtbeLatestVideosAPI';
 import { useNavigation } from '@react-navigation/native';
 import { customColors } from '../constants/Colors';
 
@@ -10,7 +10,6 @@ const VideoListScreen = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
     const navigation = useNavigation()
-    // console.log(videos);
 
     useEffect(() => {
         loadVideos()

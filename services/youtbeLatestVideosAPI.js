@@ -5,6 +5,7 @@ const API_KEY = 'AIzaSyCJqoa_yFmh_ICzuulUriz4qFTIjq9hzUQ';
 const BASE_URL = 'https://www.googleapis.com/youtube/v3';
 const VIDEOS_KEY = 'videos'
 
+
 export const fetchVideos = async (query = 'latest videos') => {
     let data = await _getData(VIDEOS_KEY)
     if (data) return data
@@ -19,13 +20,14 @@ export const fetchVideos = async (query = 'latest videos') => {
             }
         });
         _storeData(VIDEOS_KEY, response.data.items)
-        console.log('TEXT: ', response);
         return response.data.items;
     } catch (error) {
         console.error("Error fetching videos:", error);
         throw error;
     }
 };
+
+//Using storeData and getData to stop the block
 
 const _storeData = async (key, value) => {
     try {

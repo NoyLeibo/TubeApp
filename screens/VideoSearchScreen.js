@@ -1,32 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
-import ThemeButton from '../cmps/ThemeButton';
-import { useTheme } from '../contexts/ThemeProvider';
+import { useTheme } from '@react-navigation/native';
 
-function VideoSearchScreen({ navigateToSearch }) {
+function VideoSearchScreen() {
     const [searchQuery, setSearchQuery] = useState('');
-    const { theme, setTheme } = useTheme();
+    const theme = useTheme();
+    const textColor = theme.colors.text; // font color based on theme
+
+    useEffect(() => {
+        console.log('textColor', theme);
+    }, [])
 
     const handleSearch = () => {
-        // Add the search functionality here
         console.log('Searching for:', searchQuery);
     }
 
     return (
-        <View>
-            <View style={styles.container}>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Type here to search..."
-                    value={searchQuery}
-                    onChangeText={setSearchQuery}
-                />
-                <TouchableOpacity onPress={handleSearch} style={styles.button}>
-                    <Text style={styles.buttonText}>Search</Text>
-                </TouchableOpacity>
-            </View>
-            {/* render here the input search */}
-
+        <View style={[styles.container, { borderBottomColor: textColor }]}>
+            <TextInput
+                style={[styles.input, { color: textColor, borderColor: textColor }]}
+                placeholder="Type here to search..."
+                value={searchQuery}
+                onChangeText={setSearchQuery}
+            />
+            <TouchableOpacity onPress={handleSearch} style={styles.button}>
+                <Text style={[styles.buttonText, { color: textColor }]}>Search</Text>
+            </TouchableOpacity>
         </View>
     );
 }
@@ -36,23 +35,21 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         margin: 20,
         padding: 10,
-        borderBottomColor: '#ddd',
-        borderBottomWidth: 1, // Set the border width to 1
-        // width: '80%',
+        borderBottomWidth: 1,
     },
     input: {
-        color: 'red', // Text color for the input field
         width: '100%',
         height: 40,
         marginVertical: 12,
         borderWidth: 1,
         padding: 10,
-        borderColor: '#ddd'
     },
     buttonText: {
         fontWeight: 'bold',
+    },
+    button: {
+        paddingVertical: 10,
     }
 });
-
 
 export default VideoSearchScreen;

@@ -6,7 +6,7 @@ import { useTheme } from '@react-navigation/native'; // Import useTheme
 const VideoDetailsScreen = ({ route }) => {
     const { videoId, title, description } = route.params;
 
-    const theme = useTheme(); // Use the theme hook
+    const theme = useTheme();
 
     const styles = StyleSheet.create({
         container: {
