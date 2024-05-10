@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import ThemeButton from '../cmps/ThemeButton';
 
 function VideoSearchScreen() {
     const [searchQuery, setSearchQuery] = useState('');
@@ -24,17 +25,19 @@ function VideoSearchScreen() {
                 />
             </View>
             {/* render here the input search */}
+
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         alignItems: 'center',
-        padding: 20,
-        borderBottomColor: 'gray', // Set to white
+        margin: 20,
+        padding: 10,
+        borderBottomColor: '#ddd',
         borderBottomWidth: 1, // Set the border width to 1
+        // width: '80%',
     },
     input: {
         color: 'red', // Text color for the input field
