@@ -7,6 +7,7 @@ import VideoDetailsScreen from './screens/VideoDetailsScreen';
 import VideoSearchScreen from './screens/VideoSearchScreen.js';
 import { MyThemes } from './constants/Colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import ThemeButton from './cmps/ThemeButton.js';
 
 const Stack = createStackNavigator();
 
@@ -42,12 +43,7 @@ function App() {
           headerTitleStyle: {
             fontWeight: 'bold',
           },
-          headerRight: () => (
-            <Pressable onPress={toggleTheme} style={styles.btnStyle}>
-              <Text style={styles.btnTextStyle}>
-                {theme === 'light' ? 'Switch to Dark' : 'Switch to Light'}
-              </Text>
-            </Pressable>),
+          headerRight: () => (<ThemeButton theme={theme} toggleTheme={toggleTheme} />),
           // headerLeft: () => (
           //   <Button onPress={openMenu} title="B" />
           // ),
@@ -72,17 +68,6 @@ function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  btnStyle: {
-    fontWeight: 'bold',
-    marginRight: 16,
-    padding: 10,
-    color: 'white'
-  },
-  btnTextStyle: {
-    fontWeight: 'bold',
-    color: 'white',
-  },
-});
+
 
 export default App;
