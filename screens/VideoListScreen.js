@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, ActivityIndicator, Button, RefreshControl } from 'react-native';
-import { fetchVideos } from '../services/fetchLatestVideos';
+import { fetchVideos } from '../services/fetchVideos';
 import { useNavigation } from '@react-navigation/native';
 import { customColors } from '../constants/Colors';
 
@@ -43,7 +43,7 @@ const VideoListScreen = () => {
             <Image source={{ uri: item.snippet.thumbnails.medium.url }} style={styles.thumbnail} />
             <Text style={styles.title}>{item.snippet.title}</Text>
         </TouchableOpacity>
-    );
+    )
 
     if (error) {
         return (

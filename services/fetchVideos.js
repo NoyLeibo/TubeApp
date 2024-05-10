@@ -1,14 +1,16 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import config from '../config.json';
 
-const API_KEY = 'AIzaSyCJqoa_yFmh_ICzuulUriz4qFTIjq9hzUQ';
+const API_KEY = config.google_api_key;
 const BASE_URL = 'https://www.googleapis.com/youtube/v3';
 const VIDEOS_KEY = 'videos'
 
-
 export const fetchVideos = async (query = 'latest videos') => {
-    let data = await _getData(VIDEOS_KEY)
-    if (data) return data
+    if (query === 'latest videos') {
+        let data = await _getData(VIDEOS_KEY)
+        if (data) return data
+    }
     try {
         const response = await axios.get(`${BASE_URL}/search`, {
             params: {
@@ -19,7 +21,7 @@ export const fetchVideos = async (query = 'latest videos') => {
                 q: encodeURIComponent(query)
             }
         });
-        _storeData(VIDEOS_KEY, response.data.items)
+        if (query === 'latest videos') _storeData(VIDEOS_KEY, response.data.items)
         return response.data.items;
     } catch (error) {
         console.error("Error fetching videos:", error);

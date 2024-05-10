@@ -7,11 +7,12 @@ import {
     StyleSheet,
     ActivityIndicator,
     FlatList,
-    Image
+    Image,
+    Button
 } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { customColors } from '../constants/Colors';
-import { fetchVideosByQuery } from '../services/fetchVideosByQuery';
+import { fetchVideos } from '../services/fetchVideos';
 
 function VideoSearchScreen({ navigation }) {  // Make sure navigation is passed here if using
     const [searchQuery, setSearchQuery] = useState('');
@@ -23,7 +24,7 @@ function VideoSearchScreen({ navigation }) {  // Make sure navigation is passed 
     async function loadVideos() {
         setLoading(true);
         try {
-            const fetchedVideos = await fetchVideosByQuery(searchQuery);
+            const fetchedVideos = await fetchVideos(searchQuery);
             setVideos(fetchedVideos);
             setError(null);
         } catch (err) {
