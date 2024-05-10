@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
     View,
     Text,
@@ -14,15 +14,25 @@ import { useTheme } from '@react-navigation/native';
 import { customColors } from '../constants/Colors';
 import { fetchVideos } from '../services/fetchVideos';
 
-function VideoSearchScreen({ navigation }) {  // Make sure navigation is passed here if using
+function VideoSearchScreen({ navigation }) {
     const [searchQuery, setSearchQuery] = useState('');
     const [loading, setLoading] = useState(false);
     const [videos, setVideos] = useState([]);
     const [error, setError] = useState(null);
-    const { colors } = useTheme();
+    const { colors } = useTheme(); // for using text color
+    const timerRef = useRef(null); // useRef to hold the timer for debouncing
+
+    useEffect(() => {
+        return () => {
+            if (timerRef.current) {
+                clearTimeout(timerRef.current);
+            }
+        };
+    }, []);
 
     async function loadVideos() {
         setLoading(true);
+        console.log('start loading videos of the query: ', searchQuery);
         try {
             const fetchedVideos = await fetchVideos(searchQuery);
             setVideos(fetchedVideos);
@@ -31,20 +41,24 @@ function VideoSearchScreen({ navigation }) {  // Make sure navigation is passed 
             setError(err.message);
         }
         setLoading(false);
+        console.log('result of the query: ', searchQuery);
     }
 
     const handleSearch = () => {
         loadVideos();
     }
 
-    if (error) {
-        return (
-            <View style={styles.centered}>
-                <Text>Error: {error}</Text>
-                <Button title="Retry" onPress={loadVideos} />
-            </View>
-        )
-    }
+    const handleInputChange = (text) => {
+        setSearchQuery(text);
+        console.log(searchQuery);
+        if (timerRef.current) {
+            clearTimeout(timerRef.current);
+        }
+        timerRef.current = setTimeout(() => {
+            console.log('Loading videos for query:', text); // Debug log
+            loadVideos();
+        }, 1000); // Set a new timer to call loadVideos after 1 second
+    };
 
     const renderItem = ({ item }) => (
         <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('VideoDetails', {
@@ -55,7 +69,16 @@ function VideoSearchScreen({ navigation }) {  // Make sure navigation is passed 
             <Image source={{ uri: item.snippet.thumbnails.medium.url }} style={styles.thumbnail} />
             <Text style={styles.title}>{item.snippet.title}</Text>
         </TouchableOpacity>
-    );
+    )
+
+    if (error) { // for error events
+        return (
+            <View style={styles.centered}>
+                <Text>Error: {error}</Text>
+                <Button title="Retry" onPress={loadVideos} />
+            </View>
+        )
+    }
 
     return (
         <View style={styles.screen}>
@@ -65,7 +88,7 @@ function VideoSearchScreen({ navigation }) {  // Make sure navigation is passed 
                     placeholder="Type here to search..."
                     placeholderTextColor={colors.text}
                     value={searchQuery}
-                    onChangeText={setSearchQuery}
+                    onChangeText={handleInputChange}
                 />
                 <TouchableOpacity onPress={handleSearch} style={styles.button}>
                     <Text style={[styles.buttonText, { color: colors.text }]}>Search</Text>
