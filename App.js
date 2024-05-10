@@ -1,34 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Button, Pressable, StyleSheet, Text, useColorScheme } from 'react-native';
 import VideoListScreen from './screens/VideoListScreen';
 import VideoDetailsScreen from './screens/VideoDetailsScreen';
-import VideoSearchScreen from './screens/VideoSearchScreen.js';
+import VideoSearchScreen from './screens/VideoSearchScreen';
 import { MyThemes } from './constants/Colors';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import ThemeButton from './cmps/ThemeButton.js';
-import SearchButton from './cmps/SearchButton.js';
+import ThemeButton from './cmps/ThemeButton';
+import SearchButton from './cmps/SearchButton';
+import ThemeProvider, { useTheme } from './contexts/ThemeProvider';
 
 const Stack = createStackNavigator();
 
 function App() {
-  const systemTheme = useColorScheme();
-  const [theme, setTheme] = useState(systemTheme || 'light');
+  return (
+    <ThemeProvider>
+      <MainApp />
+    </ThemeProvider>
+  );
+}
 
-
-  useEffect(() => {
-    AsyncStorage.getItem('theme').then(storedTheme => {
-      console.log(storedTheme);
-      setTheme(storedTheme || systemTheme || 'light');
-    });
-  }, []);
-
-  function toggleTheme() {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    AsyncStorage.setItem('theme', newTheme);
-  }
+function MainApp() {
+  const { theme } = useTheme();
 
   function navigateToSearch() {
     console.log('Search Page');
@@ -46,14 +38,16 @@ function App() {
           headerTitleStyle: {
             fontWeight: 'bold',
           },
-          headerRight: () => (<ThemeButton theme={theme} toggleTheme={toggleTheme} />)
-        }}>
+          headerTitleAlign: 'center', // Ensure the title is centered
+          headerRight: () => <ThemeButton />
+        }}
+      >
         <Stack.Screen
           name="VideoList"
           component={VideoListScreen}
           options={{
             title: 'Video List',
-            headerLeft: () => (<SearchButton navigateToSearch={navigateToSearch} />)
+            headerLeft: () => <SearchButton navigateToSearch={navigateToSearch} />
           }}
         />
         <Stack.Screen

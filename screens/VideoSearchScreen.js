@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import ThemeButton from '../cmps/ThemeButton';
+import { useTheme } from '../contexts/ThemeProvider';
 
-function VideoSearchScreen() {
+function VideoSearchScreen({ navigateToSearch }) {
     const [searchQuery, setSearchQuery] = useState('');
+    const { theme, setTheme } = useTheme();
 
     const handleSearch = () => {
         // Add the search functionality here
@@ -19,10 +21,9 @@ function VideoSearchScreen() {
                     value={searchQuery}
                     onChangeText={setSearchQuery}
                 />
-                <Button
-                    title="Search"
-                    onPress={handleSearch}
-                />
+                <TouchableOpacity onPress={handleSearch} style={styles.button}>
+                    <Text style={styles.buttonText}>Search</Text>
+                </TouchableOpacity>
             </View>
             {/* render here the input search */}
 
@@ -47,6 +48,9 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         padding: 10,
         borderColor: '#ddd'
+    },
+    buttonText: {
+        fontWeight: 'bold',
     }
 });
 

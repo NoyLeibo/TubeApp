@@ -1,7 +1,9 @@
 import React from 'react';
 import { Text, Pressable, StyleSheet } from 'react-native';
+import { useTheme } from '../contexts/ThemeProvider';
 
-function ThemeButton({ theme, toggleTheme }) {
+function ThemeButton() {
+    const { theme, toggleTheme } = useTheme();
 
     return (
         <Pressable onPress={toggleTheme} style={styles.btnStyle}>
