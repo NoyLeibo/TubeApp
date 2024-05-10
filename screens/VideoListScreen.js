@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, ActivityIndicator, Button, RefreshControl } from 'react-native';
-import { fetchVideos } from '../services/youtbeLatestVideosAPI';
+import { fetchVideos } from '../services/fetchLatestVideos';
 import { useNavigation } from '@react-navigation/native';
 import { customColors } from '../constants/Colors';
 
