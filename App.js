@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Button, StyleSheet, useColorScheme } from 'react-native';
+import { Button, Pressable, StyleSheet, Text, useColorScheme } from 'react-native';
 import VideoListScreen from './screens/VideoListScreen';
 import VideoDetailsScreen from './screens/VideoDetailsScreen';
 import VideoSearchScreen from './screens/VideoSearchScreen.js';
@@ -43,12 +43,11 @@ function App() {
             fontWeight: 'bold',
           },
           headerRight: () => (
-            <Button
-              onPress={toggleTheme}
-              title="Toggle Theme"
-              color={theme === 'light' ? 'black' : 'white'}
-              style={styles.btnStyle}
-            />),
+            <Pressable onPress={toggleTheme} style={styles.btnStyle}>
+              <Text style={styles.btnTextStyle}>
+                {theme === 'light' ? 'Switch to Dark' : 'Switch to Light'}
+              </Text>
+            </Pressable>),
           // headerLeft: () => (
           //   <Button onPress={openMenu} title="B" />
           // ),
@@ -77,6 +76,12 @@ const styles = StyleSheet.create({
   btnStyle: {
     fontWeight: 'bold',
     marginRight: 16,
+    padding: 10,
+    color: 'white'
+  },
+  btnTextStyle: {
+    fontWeight: 'bold',
+    color: 'white',
   },
 });
 
