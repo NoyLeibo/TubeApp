@@ -8,6 +8,7 @@ const customColors = {
     secondary: '#a8d2f0',
     tintColor,
     tabIconDefault: '#ccc',
+    borderColor: '#bbbbbb',
     tabIconSelected: tintColor,
     tabBar: '#fefefe',
     errorBackground: 'red',

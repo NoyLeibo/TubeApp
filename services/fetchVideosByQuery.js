@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const API_KEY = 'AIzaSyCJqoa_yFmh_ICzuulUriz4qFTIjq9hzUQ';
-const BASE_URL = 'https://www.googleapis.com/youtube/v3';
+const API_KEY = 'AIzaSyCJqoa_yFmh_ICzuulUriz4qFTIjq9hzUQ'
+const BASE_URL = 'https://www.googleapis.com/youtube/v3'
 
 // This function fetches the first 10 videos based on a search query from YouTube
 export const fetchVideosByQuery = async (query) => {

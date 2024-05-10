@@ -82,8 +82,8 @@ const styles = StyleSheet.create({
     item: {
         flexDirection: 'row',
         padding: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: customColors.secondary,
+        borderTopWidth: 1,
+        borderTopColor: customColors.borderColor,
     },
     thumbnail: {
         width: 100,

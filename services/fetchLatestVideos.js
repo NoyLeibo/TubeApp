@@ -27,7 +27,7 @@ export const fetchVideos = async (query = 'latest videos') => {
     }
 };
 
-//Using storeData and getData to stop the block
+//Using storeData and getData to stop block from youtbe
 
 const _storeData = async (key, value) => {
     try {
