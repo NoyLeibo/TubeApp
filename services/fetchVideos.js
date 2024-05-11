@@ -18,9 +18,10 @@ export const fetchVideos = async (query = 'latest videos') => {
                 maxResults: 10,
                 key: API_KEY,
                 type: 'video',
-                q: encodeURIComponent(query)
+                q: query
             }
         });
+        console.log('API Response:', response.data); // this line is to log the response
         if (query === 'latest videos') _storeData(VIDEOS_KEY, response.data.items)
         return response.data.items;
     } catch (error) {

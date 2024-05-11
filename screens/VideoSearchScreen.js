@@ -22,7 +22,7 @@ function VideoSearchScreen({ navigation }) {
     const { colors } = useTheme(); // for using text color
     const timerRef = useRef(null); // useRef to hold the timer for debouncing
 
-    useEffect(() => {
+    useEffect(() => { // if there's a timer exists, it'll stop him when the cmp wil turn on
         return () => {
             if (timerRef.current) {
                 clearTimeout(timerRef.current);
@@ -30,37 +30,35 @@ function VideoSearchScreen({ navigation }) {
         };
     }, []);
 
-    async function loadVideos() {
+    async function loadVideos(text = searchQuery) { // load videos by the text and setState them
         setLoading(true);
-        console.log('start loading videos of the query: ', searchQuery);
         try {
-            const fetchedVideos = await fetchVideos(searchQuery);
+            const fetchedVideos = await fetchVideos(text);
             setVideos(fetchedVideos);
             setError(null);
         } catch (err) {
             setError(err.message);
         }
         setLoading(false);
-        console.log('result of the query: ', searchQuery);
+        console.log('got result for: ', text);
     }
 
-    const handleSearch = () => {
+    function handleSearch() { // will loadsVideos after clicking Search
         loadVideos();
     }
 
-    const handleInputChange = (text) => {
+    function handleInputChange(text) { // this function will loadVideos after user stop typing for 1sec
         setSearchQuery(text);
-        console.log(searchQuery);
-        if (timerRef.current) {
+        if (timerRef.current) { // if there's a timer exists, it'll stop him before start a new one
             clearTimeout(timerRef.current);
         }
         timerRef.current = setTimeout(() => {
-            console.log('Loading videos for query:', text); // Debug log
-            loadVideos();
+            loadVideos(text);
         }, 1000); // Set a new timer to call loadVideos after 1 second
     };
 
     const renderItem = ({ item }) => (
+        // if clicked on video will move to details video with params
         <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('VideoDetails', {
             videoId: item.id.videoId,
             title: item.snippet.title,
@@ -71,11 +69,11 @@ function VideoSearchScreen({ navigation }) {
         </TouchableOpacity>
     )
 
-    if (error) { // for error events
+    if (error) { // only if there's error exists from API
         return (
             <View style={styles.centered}>
                 <Text>Error: {error}</Text>
-                <Button title="Retry" onPress={loadVideos} />
+                <Button title="Retry" onPress={loadVideos} /> {/* Rerty to loadVideos again */}
             </View>
         )
     }
@@ -96,7 +94,7 @@ function VideoSearchScreen({ navigation }) {
             </View>
             {loading && <ActivityIndicator size="large" color={customColors.loaderColor} />}
             {error && <Text style={{ color: customColors.primary }}>{error}</Text>}
-            <FlatList
+            <FlatList // render all videos list
                 data={videos}
                 renderItem={renderItem}
                 keyExtractor={item => item.id.videoId}
