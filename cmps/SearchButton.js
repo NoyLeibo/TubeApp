@@ -2,9 +2,10 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Text, Pressable, StyleSheet } from 'react-native';
 
-function SearchButton({ navigateToSearch }) {
-    const navigation = useNavigation()
+function SearchButton() {
+    const navigation = useNavigation()// Hook to access navigation functionality
 
+    // returns a pressable button that navigates to the VideoSearch screen when pressed
     return (
         <Pressable onPress={() => navigation.navigate('VideoSearch')} style={styles.btnStyle}>
             <Text style={styles.btnTextStyle}>Search</Text>
@@ -12,6 +13,7 @@ function SearchButton({ navigateToSearch }) {
     );
 };
 
+//StyleSheet for the SearchButton component
 const styles = StyleSheet.create({
     btnStyle: {
         fontWeight: 'bold',
