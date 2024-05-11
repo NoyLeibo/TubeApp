@@ -50,7 +50,7 @@ const VideoListScreen = () => {
     if (error) { // render this error and retry button if there is an error
         return (
             <View style={styles.centered}>
-                <Text>Error: {error}</Text>
+                <Text style={{ color: 'red' }}>Error: {error}</Text>
                 <Button title="Retry" onPress={loadVideos} />
             </View>
         )
