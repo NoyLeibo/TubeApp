@@ -1,1 +1,2 @@
 # React Native Video App
+This React Native application allows users to search and view video details, switch between light and dark themes, and navigate through different screens using React Navigation.
