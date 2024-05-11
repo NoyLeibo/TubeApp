@@ -36,7 +36,7 @@ const VideoListScreen = () => {
 
     const renderItem = ({ item }) => (  // Render function for each video item
         // if clicked on video will move to details video with params
-        <TouchableOpacity TouchableOpacity style={styles.item} onPress={() => navigation.navigate('VideoDetails', {
+        <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('VideoDetails', {
             videoId: item.id.videoId,
             title: item.snippet.title,
             description: item.snippet.description
