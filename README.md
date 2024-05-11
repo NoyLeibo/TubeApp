@@ -13,7 +13,7 @@ This React Native application allows users to search and view video details, swi
 
 **Handling Problems:** The app can deal with issues when fetching data from YouTube and tells users nicely if there's nothing to show.
 
-## ** Prerequisites **
+## **Prerequisites**
 Before you can run the app, you will need:
 
 Node.js is installed on your computer.
