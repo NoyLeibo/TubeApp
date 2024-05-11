@@ -7,10 +7,10 @@ const BASE_URL = 'https://www.googleapis.com/youtube/v3';
 const VIDEOS_KEY = 'videos'
 
 export const fetchVideos = async (query = 'latest videos') => {
-    if (query === 'latest videos') {
-        let data = await _getData(VIDEOS_KEY)
-        if (data) return data
-    } // to not fetch new videos every refresh (reason: youtube blocked me for a lot of requests)
+    // if (query === 'latest videos') {
+    //     let data = await _getData(VIDEOS_KEY)
+    //     if (data) return data
+    // } // to not fetch new videos every refresh (reason: youtube blocked me for a lot of requests)
     try {
         const response = await axios.get(`${BASE_URL}/search`, {
             params: {
@@ -22,7 +22,7 @@ export const fetchVideos = async (query = 'latest videos') => {
             }
         });
         // console.log('API Response:', response.data) // this line is to log the response
-        if (query === 'latest videos') _storeData(VIDEOS_KEY, response.data.items)
+        // if (query === 'latest videos') _storeData(VIDEOS_KEY, response.data.items)
         return response.data.items
     } catch (error) {
         console.error("Error fetching videos:", error)
