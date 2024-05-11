@@ -1,6 +1,7 @@
 # **React Native Video App**
 This React Native application allows users to search and view video details, switch between light and dark themes, and navigate through different screens using React Navigation.
 
+
 ## **Features**
 **Responsive UI:** The app has a top section showing the app's name and a main area where you can scroll through small pictures and names of videos.
 
@@ -11,6 +12,7 @@ This React Native application allows users to search and view video details, swi
 **Smart Loading:** The app only loads videos when needed and manages information wisely to work faster.
 
 **Handling Problems:** The app can deal with issues when fetching data from YouTube and tells users nicely if there's nothing to show.
+
 
 ## **Technologies**
 **React Native:** Framework for building native apps using React.
@@ -25,6 +27,7 @@ This React Native application allows users to search and view video details, swi
 
 **Context:** For state management across the app.
 
+
 ## **Prerequisites**
 **Before you can run the app, you will need:**
 
@@ -34,9 +37,9 @@ A Google Developer account for accessing the YouTube Data API.
 
 An API key to authenticate API requests.
 
-## Getting Started
 
-### To run TubeView locally, follow these steps:
+## Getting Started
+### To run TubeApp locally, follow these steps:
 
 1. **Clone the Repository:**
    ```bash
