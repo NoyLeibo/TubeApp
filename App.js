@@ -46,7 +46,7 @@ function MainApp() {
           name="VideoList"
           component={VideoListScreen}
           options={{
-            title: 'Video List',  //Title for the VideoList screen
+            title: 'Latest Videos',  //Title for the VideoList screen
             headerLeft: () => <SearchButton />  // Render search button on the left side of the header
           }}
         />
