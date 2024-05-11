@@ -1,4 +1,4 @@
-# **React Native Video App**
+# **React Native Video App - _TubeApp_**
 This React Native application allows users to search and view video details, switch between light and dark themes, and navigate through different screens using React Navigation.
 
 
@@ -27,6 +27,7 @@ This React Native application allows users to search and view video details, swi
 
 **useContext:** For state management across the app.
 
+**React Native Async Storage:** To save key-value in storage system. store user preferences (Theme color).
 
 ## **Prerequisites**
 **Before you can run the app, you will need:**
