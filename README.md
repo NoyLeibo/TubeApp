@@ -35,7 +35,14 @@ An API key to authenticate API requests.
 3. **Install Dependencies:**
       ```bash
       npm i
-4. **Run the Application:**
+4. **API Key Configuration::**
+   Obtain an API key by following the instructions on Google Developer Console.
+   Edit config.json file in the root directory and add your API key
+      ```bash
+      {
+     "google_api_key": "YOUR_API_KEY"
+      }
+6. **Run the Application:**
       ```bash
       npx expo start
-5. **Scan the qr code and open the app with Expo Go**
+7. **Scan the qr code and open the app with Expo Go**
