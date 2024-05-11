@@ -35,8 +35,9 @@ An API key to authenticate API requests.
 3. **Install Dependencies:**
       ```bash
       npm i
-4. **API Key Configuration::**
+4. **API Key Configuration:**
    Obtain an API key by following the instructions on Google Developer Console.
+   
    Edit config.json file in the root directory and add your API key
       ```bash
       {
