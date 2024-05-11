@@ -11,36 +11,35 @@ import {
     Button
 } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import { customColors } from '../constants/Colors';
-import { fetchVideos } from '../services/fetchVideos';
+import { customColors } from '../constants/Colors'; // Custom color constants
+import { fetchVideos } from '../services/fetchVideos'; //fetch videos from the API
 
 function VideoSearchScreen({ navigation }) {
-    const [searchQuery, setSearchQuery] = useState('');
-    const [loading, setLoading] = useState(false);
-    const [videos, setVideos] = useState([]);
-    const [error, setError] = useState(null);
+    const [searchQuery, setSearchQuery] = useState(''); // state to store the search query input by the user
+    const [loading, setLoading] = useState(false); // state to track loading status
+    const [videos, setVideos] = useState([]); // State to store fetched videos
+    const [error, setError] = useState(null);  // State to store errors
     const { colors } = useTheme(); // for using text color
     const timerRef = useRef(null); // useRef to hold the timer for debouncing
 
-    useEffect(() => { // if there's a timer exists, it'll stop him when the cmp wil turn on
+    useEffect(() => { // clear the timer on component unmount
         return () => {
             if (timerRef.current) {
-                clearTimeout(timerRef.current);
+                clearTimeout(timerRef.current) // clear any existing timer
             }
         };
     }, []);
 
-    async function loadVideos(text = searchQuery) { // load videos by the text and setState them
-        setLoading(true);
+    async function loadVideos(text = searchQuery) { // function to load videos based on the search query
+        setLoading(true) // will show a loading bar
         try {
-            const fetchedVideos = await fetchVideos(text);
-            setVideos(fetchedVideos);
-            setError(null);
+            const fetchedVideos = await fetchVideos(text) // fetch videos from the API
+            setVideos(fetchedVideos) // update the videos state
+            setError(null) // clear errors because fetch is successful
         } catch (err) {
-            setError(err.message);
+            setError(err.message) // Set the error state if catched
         }
-        setLoading(false);
-        console.log('got result for: ', text);
+        setLoading(false) // will turn off the loading bar
     }
 
     function handleSearch() { // will loadsVideos after clicking Search
@@ -69,7 +68,7 @@ function VideoSearchScreen({ navigation }) {
         </TouchableOpacity>
     )
 
-    if (error) { // only if there's error exists from API
+    if (error) { // render this error and retry button if there is an error
         return (
             <View style={styles.centered}>
                 <Text>Error: {error}</Text>
