@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { customColors } from '../constants/Colors'; // Custom color constants
-import { fetchVideos } from '../services/fetchVideos'; //fetch videos from the API
+import { fetchVideos } from '../services/fetchVideos'; //fetch videos from the API file
 
 function VideoSearchScreen({ navigation }) {
     const [searchQuery, setSearchQuery] = useState(''); // state to store the search query input by the user
@@ -31,7 +31,7 @@ function VideoSearchScreen({ navigation }) {
     }, []);
 
     async function loadVideos(text = searchQuery) { // function to load videos based on the search query
-        setLoading(true) // will show a loading bar
+        setLoading(true) // will make the loading on screen
         try {
             const fetchedVideos = await fetchVideos(text) // fetch videos from the API
             setVideos(fetchedVideos) // update the videos state
@@ -56,7 +56,7 @@ function VideoSearchScreen({ navigation }) {
         }, 1000); // Set a new timer to call loadVideos after 1 second
     };
 
-    const renderItem = ({ item }) => (
+    const renderItem = ({ item }) => ( // Render function for each video item
         // if clicked on video will move to details video with params
         <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('VideoDetails', {
             videoId: item.id.videoId,
@@ -67,6 +67,7 @@ function VideoSearchScreen({ navigation }) {
             <Text style={styles.title}>{item.snippet.title}</Text>
         </TouchableOpacity>
     )
+
 
     if (error) { // render this error and retry button if there is an error
         return (

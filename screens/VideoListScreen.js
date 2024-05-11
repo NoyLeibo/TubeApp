@@ -1,40 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity, ActivityIndicator, Button, RefreshControl } from 'react-native';
-import { fetchVideos } from '../services/fetchVideos';
 import { useNavigation } from '@react-navigation/native';
-import { customColors } from '../constants/Colors';
+import { fetchVideos } from '../services/fetchVideos';  //fetch videos from the API file
+import { customColors } from '../constants/Colors';// Custom color constants
 
 const VideoListScreen = () => {
-    const [videos, setVideos] = useState([])
-    const [refreshing, setRefreshing] = useState(false)
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState(null)
+    const [videos, setVideos] = useState([]) // State to store fetched videos
+    const [refreshing, setRefreshing] = useState(false)   // state to track refreshing status
+    const [loading, setLoading] = useState(false)  // state to track loading status
+    const [error, setError] = useState(null) // State to store errors
     const navigation = useNavigation()
 
     useEffect(() => {
         loadVideos()
-    }, [])
+    }, []) //load videos on component mount
 
     function onRefresh() {
         setRefreshing(true)
         loadVideos().then(() => {
             setRefreshing(false)
         })
-    }
+    } // handle the pull-to-refresh action
 
     async function loadVideos() {
-        setLoading(true)
+        setLoading(true) // will make the loading on screen
         try {
-            const fetchedVideos = await fetchVideos()
-            setVideos(fetchedVideos)
-            setError(null)
+            const fetchedVideos = await fetchVideos() // fetch videos from the API
+            setVideos(fetchedVideos) // update the videos state
+            setError(null)// clear errors because fetch is successful
         } catch (err) {
-            setError(err.message)
+            setError(err.message) // Set the error state if catched
         }
         setLoading(false)
-    }
+    } //fetch videos with no query by latest videos and update state 
 
-    const renderItem = ({ item }) => (
+    const renderItem = ({ item }) => (  // Render function for each video item
+        // if clicked on video will move to details video with params
         <TouchableOpacity TouchableOpacity style={styles.item} onPress={() => navigation.navigate('VideoDetails', {
             videoId: item.id.videoId,
             title: item.snippet.title,
@@ -45,7 +46,8 @@ const VideoListScreen = () => {
         </TouchableOpacity>
     )
 
-    if (error) {
+
+    if (error) { // render this error and retry button if there is an error
         return (
             <View style={styles.centered}>
                 <Text>Error: {error}</Text>
