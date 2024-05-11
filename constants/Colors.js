@@ -1,24 +1,16 @@
 import { DefaultTheme, DarkTheme } from '@react-navigation/native';
 
-const tintColor = '#2f95dc';
 
 const customColors = {
-    loaderColor: "#0000ff",
-    primary: '#FF0000', // Red color
-    secondary: '#a8d2f0',
-    tintColor,
-    tabIconDefault: '#ccc',
-    borderColor: '#bbbbbb',
-    tabIconSelected: tintColor,
-    tabBar: '#fefefe',
-    errorBackground: 'red',
-    errorText: '#fff',
-    warningBackground: '#EAEB5E',
-    warningText: '#666804',
-    noticeBackground: tintColor,
-    noticeText: '#fff',
-    headerBackground: '#FF0000', // YouTube Red color
-    headerText: '#fff', // White text
+    loaderColor: "#0000ff", // Blue color used for loading
+    primary: '#FF0000', // Bright red color, used as the main color theme
+    secondary: '#a8d2f0', // Light blue color, used for secondary
+    tintColor: '#2f95dc', // Light-dark blue color
+    borderColor: '#bbbbbb', // Gray color for solid border
+    errorText: '#fff', // White color, used for error messages for better visibility against dark backgrounds
+    headerBackground: '#FF0000', // Red color, used for light header backgrounds
+    headerBackgroundDark: 'rgb(18, 18, 18)', // Red color,used for dark header backgrounds
+    headerText: '#fff', // White text, used on headers for the red background
 };
 
 const MyThemes = {
@@ -28,8 +20,8 @@ const MyThemes = {
             ...DefaultTheme.colors,
             primary: customColors.primary,
             background: 'white',
-            card: customColors.headerBackground,
-            text: '#000',
+            card: customColors.headerBackground,// light card background
+            text: '#000', // black text, on light backgrounds.
             border: customColors.secondary,
         },
     },
@@ -39,8 +31,8 @@ const MyThemes = {
             ...DarkTheme.colors,
             primary: customColors.primary,
             background: 'black',
-            card: 'rgb(18, 18, 18)',
-            text: '#fff',
+            card: customColors.headerBackgroundDark, // Dark card background
+            text: '#fff', // White text, on dark backgrounds.
             border: customColors.secondary,
         },
     }
