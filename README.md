@@ -21,3 +21,21 @@ Node.js is installed on your computer.
 A Google Developer account for accessing the YouTube Data API.
 
 An API key to authenticate API requests.
+
+## Getting Started
+
+### To run TubeView locally, follow these steps:
+
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/NoyLeibo/TubeApp
+2. **Navigate to the Project Directory:**
+      ```bash
+      cd TubeApp
+3. **Install Dependencies:**
+      ```bash
+      npm i
+4. **Run the Application:**
+      ```bash
+      npx expo start
+5. **Scan the qr code and open the app with Expo Go**
