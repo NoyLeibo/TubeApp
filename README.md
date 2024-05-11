@@ -2,7 +2,6 @@
 This React Native application allows users to search and view video details, switch between light and dark themes, and navigate through different screens using React Navigation.
 
 ## **Features**
-
 **Responsive UI:** The app has a top section showing the app's name and a main area where you can scroll through small pictures and names of videos.
 
 **YouTube API:** The app gets video information from YouTube when you provide a special access code (API key).
@@ -12,6 +11,19 @@ This React Native application allows users to search and view video details, swi
 **Smart Loading:** The app only loads videos when needed and manages information wisely to work faster.
 
 **Handling Problems:** The app can deal with issues when fetching data from YouTube and tells users nicely if there's nothing to show.
+
+## **Technologies**
+**React Native:** Framework for building native apps using React.
+
+**YouTube Data API:** For fetching video details and other related information from YouTube.
+
+**React Navigation:** Library for routing and navigation in React Native apps.
+
+**Expo:** Framework and platform for universal React applications.
+
+**Axios:** Promise-based HTTP client for making API requests.
+
+**Context:** For state management across the app.
 
 ## **Prerequisites**
 **Before you can run the app, you will need:**
