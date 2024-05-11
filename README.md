@@ -25,7 +25,7 @@ This React Native application allows users to search and view video details, swi
 
 **Axios:** Promise-based HTTP client for making API requests.
 
-**Context:** For state management across the app.
+**useContext:** For state management across the app.
 
 
 ## **Prerequisites**
