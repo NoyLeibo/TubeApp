@@ -27,7 +27,7 @@ function MainApp() {
   const { theme } = useTheme()  //get the current theme context
 
   return (
-    <NavigationContainer theme={MyThemes[theme]}> {/*Apply the current theme to the navigation container */}
+    <NavigationContainer theme={MyThemes[theme]}>
       <Stack.Navigator
         initialRouteName="VideoList" //Set the default screen of the stack
         screenOptions={{
